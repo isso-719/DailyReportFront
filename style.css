@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #fdf8e1;
+    font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+    text-align: center;
+    margin: 32px 0;
+    font-size: 48px;
+    font-family: 'Pacifico', cursive;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-container .textarea-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+#header {
+    height: 72px;
+    line-height: 36px;
+    background-size: 100% 36px;
+    font-size: 16px;
+}
+
+textarea {
+    border: none;
+    width: 100%;
+    height: 320px;
+    width: 540px;
+    border-bottom: 1px solid #ccc;
+    line-height: 20px;
+    background: linear-gradient(to bottom, #eee 1px, white 1px);
+    background-size: 100% 20px;
+    background-origin: content-box;
+    background-attachment: local;
+    resize: none;
+    display: block;
+}
+
+textarea:focus {
+    outline: none;
+}
+
+.input-container .textarea-wrapper button {
+    margin: 16px;
+    height: 32px;
+    width: 32px;
+    border: none;
+    background: rgb(223, 223, 223);
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.input-container .textarea-wrapper button:disabled {
+    cursor: not-allowed;
+}
+
+.input-container button#send {
+    margin-top: 20px;
+    width: 540px;
+    height: 36px;
+    border: none;
+    background: #aaf5ff;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 25px;
+    color: #313131;
+    transition: 0.3s ease-in-out;
+    font-weight: 500;
+}
+
+.input-container button#send:before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    content: '';
+    width: 0;
+    border-width: 0 16px 16px 0;
+    border-style: solid;
+    border-color: #fafcfc #fafcfc #c7c7c7 #cbcbcb;
+    box-shadow: -1px 1px 2px rgb(0 0 0 / 10%);
+}
+
+.input-container button#send:hover {
+    cursor: pointer;
+}
+
+.list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 120px;
+}
+
+.list {
+    margin-bottom: 24px;
+}
+
+footer {
+    height: 60px;
+}

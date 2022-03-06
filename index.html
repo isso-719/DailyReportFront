@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>日報アプリ</title>
+</head>
+
+<body>
+    <h1>Daily Report</h1>
+    <div class="input-container">
+        <div class="textarea-wrapper">
+            <!-- <button id="before">&lt;</button> -->
+            <div>
+                <!-- <textarea id="header" disabled></textarea> -->
+                <textarea id="body" type="text" name="body" placeholder="今日起きたことを入力"></textarea>
+            </div>
+            <!-- <button id="after" disabled>&gt;</button> -->
+        </div>
+        <button id="send">記録する</button>
+    </div>
+
+    <div class="list-container" style="display: none">
+        <h2>記録一覧</h2>
+        <div class="list-wrapper">
+        </div>
+    </div>
+
+    <footer></footer>
+
+    <script>
+        window.onload = function() {
+            // ajax
+            $.ajax({
+                url: 'http://localhost:8080/report/get',
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    reports = data.reports;
+                    if (reports.length == 0) {
+                        return;
+                    }
+                    // .list-container を表示
+                    $('.list-container').css('display', 'flex');
+                    for (var i = 0; i < reports.length; i++) {
+                        var report = reports[i];
+
+                        // .list-wrapper に追加
+                        var list_wrapper = document.getElementsByClassName('list-wrapper')[0];
+                        // list_wrapper に 以下の文字列を追加
+                        list_wrapper.innerHTML += `<div class="list"><div class="list-header"><textarea id="header" disabled>`
+                            + reports[i].CreatedAt + "\n" + reports[i].weather
+                            + `</textarea><textarea id="body" type="text"name="body">`
+                            + reports[i].body
+                            + `</textarea></div></div>`;
+
+                        console.log(reports[i]);
+                    }
+                }
+            });
+        }
+
+        // 記録する
+        $('#send').click(function() {
+            var body = $('#body').val();
+            if (body == "") {
+                // アラート
+                alert("何か入力してください");
+                return;
+            }
+            // ajax
+            $.ajax({
+                url: 'http://localhost:8080/report/post',
+                type: 'POST',
+                data: {
+                    body: body
+                },
+                dataType: 'json',
+            });
+            location.href = location.href;
+        });
+    </script>
+</body>
+</html>
